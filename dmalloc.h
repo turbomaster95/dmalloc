@@ -9,4 +9,7 @@ typedef struct Header {
   struct Header *next;
 } Header;
 
+void *malloc(size_t size);
+void free(void *ptr);
+
 #endif

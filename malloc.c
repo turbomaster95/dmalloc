@@ -3,9 +3,9 @@
 #include "glue.h"
 #include "dmalloc.h"
 
-static uint8_t *bump_ptr;
-static uint8_t *heap_end;
-static Header  *free_list = NULL;
+uint8_t *bump_ptr;
+uint8_t *heap_end;
+Header *free_list = NULL;
 
 void minit(void *memory, size_t mem_size) {
     bump_ptr = (uint8_t *)memory;
@@ -34,16 +34,4 @@ void *malloc(size_t size) {
     bump_ptr += total_size;
 
     return (void *)(header + 1);
-}
-
-
-void free(void *ptr) {
-    if (!ptr) return;
-
-    // the header sits right before the data pointer
-    Header *header = (Header *)ptr - 1;
-
-    // put onto the free list stack
-    header->next = free_list;
-    free_list    = header;
 }
