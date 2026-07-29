@@ -1,11 +1,8 @@
 #include <stdint.h>
 #include <stddef.h>
+#include <string.h>
 #include "glue.h"
 #include "dmalloc.h"
-
-extern uint8_t *bump_ptr;
-extern uint8_t *heap_end;
-extern Header *free_list;
 
 void *calloc(size_t nmemb, size_t size) {
     size_t total_size = nmemb * size;
@@ -14,10 +11,7 @@ void *calloc(size_t nmemb, size_t size) {
 
     void *ptr = malloc(total_size);
     if (ptr) {
-        uint8_t *byte_ptr = (uint8_t *)ptr;
-        for (size_t i = 0; i < total_size; i++) {
-            byte_ptr[i] = 0;
-        }
+        memset(ptr, 0, total_size);
     }
     return ptr;
 }

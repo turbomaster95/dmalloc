@@ -7,13 +7,17 @@ extern uint8_t *bump_ptr;
 extern uint8_t *heap_end;
 extern Header *free_list;
 
-void free(void *ptr) {
+void dev_free(void *ptr) {
     if (!ptr) return;
 
-    // the header sits right before the data pointer
     Header *header = (Header *)ptr - 1;
 
-    // put onto the free list stack
+    if (header->is_mmapped) {
+        size_t total_size = sizeof(Header) + header->size;
+        pal_munmap(header, total_size);
+        return;
+    }
+
     header->next = free_list;
-    free_list    = header;
+    free_list = header;
 }

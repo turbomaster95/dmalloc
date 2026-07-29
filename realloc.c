@@ -4,10 +4,6 @@
 #include "glue.h"
 #include "dmalloc.h"
 
-extern uint8_t *bump_ptr;
-extern uint8_t *heap_end;
-extern Header *free_list;
-
 void *realloc(void *ptr, size_t size) {
     if (!ptr) return malloc(size);
     if (size == 0) {
