@@ -1,7 +1,9 @@
 #include <stdint.h>
 #include <stddef.h>
-#include "glue.h"
 #include "dmalloc.h"
+
+#define GIMPL
+#include "glue.h"
 
 uint8_t *bump_ptr;
 uint8_t *heap_end;
