@@ -7,7 +7,7 @@ extern uint8_t *bump_ptr;
 extern uint8_t *heap_end;
 extern Header *free_list;
 
-void dev_free(void *ptr) {
+void free(void *ptr) {
     if (!ptr) return;
 
     Header *header = (Header *)ptr - 1;
