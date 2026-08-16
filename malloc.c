@@ -2,7 +2,9 @@
 #include <stddef.h>
 #include "dmalloc.h"
 
+#ifndef OTHERR
 #define GIMPL
+#endif
 #include "glue.h"
 
 uint8_t *bump_ptr;
